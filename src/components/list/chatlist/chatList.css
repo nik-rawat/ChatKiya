@@ -1,0 +1,84 @@
+.ChatList{
+    flex: 1;
+    overflow: scroll;
+    /* scrollbar-color: #0f201a #e0e0e0;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable; */
+    .search{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+
+        .searchBar{
+            flex: 1px;
+            background: rgba(11, 27, 22, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-radius: 10px;
+            padding: 10px;
+
+            input{
+                background: transparent;
+                border: none;
+                outline: none;
+                color: white;
+                flex: 1;
+            }
+            img{
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .add{
+            width: 36px;
+            height: 36px;
+            background: rgba(11, 27, 22, 0.5);
+            border-radius: 10px;
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+    .item{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        cursor: pointer;
+        border-bottom: 1px solid #dddddd35;
+
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .texts{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            span{
+                font-weight: 500;
+            }
+            p{
+                font-size: 14px;
+                font-weight: 300;
+                color: gray;
+            }
+        }
+    }
+}
+/* 
+.ChatList::-webkit-scrollbar{
+}
+.ChatList::-webkit-scrollbar-track {
+    background-color: darkgrey;
+}
+
+interact with the scrollbar.
+
+.section::-webkit-scrollbar-thumb {
+box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+} */
