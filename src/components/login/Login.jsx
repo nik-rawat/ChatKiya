@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./login.css";
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [avatar, setAvatar] = useState({
@@ -19,11 +20,10 @@ const Login = () => {
     }
 
     const handleLogin = e => {
-        e,preventDefault()
-        toast.error("There is an wrror")
-        toast.sucess(
-            "You have successfully registered"  
-        )
+        e.preventDefault() 
+        toast.warn("warning")
+        // toast.error("There is an error")
+        // toast.success("You have successfully registered")
     }
 
     return (
