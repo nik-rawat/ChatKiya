@@ -66,6 +66,11 @@
                     color: rgba(3, 33, 17, 0.8);
                     background-color: rgba(103, 206, 122, 0.417);
                 }
+
+                &:disabled{
+                    background-color: rgba(9, 64, 36, 0.28);
+                    cursor: not-allowed;
+                }
             }
         }
     }

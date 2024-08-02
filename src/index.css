@@ -17,6 +17,17 @@ body{
   color: #fff;
 }
 
+.loading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 10px;
+  background: rgba(17, 25, 40, 0.9);
+  font-size: 36px;
+}
+
 .container{
   width: 100vw;
   height: 100vh;

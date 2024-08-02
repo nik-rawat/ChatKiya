@@ -101,5 +101,12 @@
                 background-color: rgba(232, 26, 67, 0.6);
             }
         }
+        .logout{
+            background-color: rgba(255, 197, 50, 0.4);
+        
+            &:hover{
+                background-color: rgba(255, 297, 50, 0.6);
+            }
+        }
     }
 }
