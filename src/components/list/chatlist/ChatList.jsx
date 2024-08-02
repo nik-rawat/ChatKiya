@@ -1,8 +1,36 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./chatList.css"
 import AddUser from "./addUser/AddUser"
+import { useUserStore } from "../../../lib/userStore"
+import { doc, onSnapshot } from "firebase/firestore"
+import { db } from "../../../lib/firebase"
 
 const ChatList = () => {
+  const [chats, setChats] = useState([]);
+  const {currentUser} = useUserStore();
+
+  useEffect(()=> {
+    const unSub = onSnapshot(doc(db, "userchats", currentUser.id), async (res) => {
+      const items = res.data().chats;
+
+      const promises = items.map(async item => {
+        const userDocRef = doc(db, "users", item.recericerId);
+        const userDocSnap = await getDoc(userDocRef);
+
+        const user = userDocSnap.data();
+        return {...item, user};
+      })
+      const chatData = await Promise.all(promises);
+      setChats(chatData.sort((a,b) => b.updatedAt - a.updatedAt));
+    });
+
+    return ()=>{
+      unSub();
+    }
+  },[currentUser.id]);
+
+  console.log(chats);
+
   const [addMode, setAddMode] = useState(false)
   return (
     <div className='ChatList'>
@@ -15,37 +43,17 @@ const ChatList = () => {
           setAddMode(prev => !prev)
         } />
       </div>
-      <div className="item">
-        <img src="./avatar.png" alt="" />
-        <div className="texts">
-          <span className="userName">Kartik Rana</span>
-          <p>Aur Bhai kaisa hai?</p>
-        </div>
-      </div>
 
-      <div className="item">
-        <img src="./avatar.png" alt="" />
-        <div className="texts">
-          <span className="userName">Keshav</span>
-          <p>Aaja Bhai BGMI me</p>
+      {chats.map(chat => {  
+        <div className="item" key={chat.ChatId}>
+          <img src="./avatar.png" alt="" />
+          <div className="texts">
+            <span className="userName">{chat.receiverId}</span>
+            <p>{chat.lastMessage}</p>
+          </div>
         </div>
-      </div>
+      })}
       
-      <div className="item">
-        <img src="./avatar.png" alt="" />
-        <div className="texts">
-          <span className="userName">Pawas Panday</span>
-          <p>Assignment bhej dena toh OS ka</p>
-        </div>
-      </div>
-
-      <div className="item">
-        <img src="./avatar.png" alt="" />
-        <div className="texts">
-          <span className="userName">Prakhar Chaubey</span>
-          <p>Isme Registration kar le</p>
-        </div>
-      </div>
       {addMode && <AddUser />}
     </div>
   )
