@@ -67,10 +67,18 @@
 
             &.own{
                 align-self: flex-end;
-
-                p{
-                    background-color: #36e78367;
+                .texts{
+                    align-items: flex-end;
+                    p{
+                        background-color: #36e78367;
+                    }
                 }
+
+            }
+            .loading-indicator {
+                font-size: 12px;
+                color: #666;
+                margin-top: 5px;
             }
 
             img{
@@ -90,7 +98,7 @@
                 }
 
                 img{
-                    width: 100%;
+                    width: auto;
                     height: 300px;
                     object-fit: cover;
                     border-radius: 10px;
@@ -131,6 +139,10 @@
             padding: 20px;
             border-radius: 10px;
             font-size: 16px;
+
+            &:disabled{
+                cursor: not-allowed;
+            }
         }
 
         .emoji{
@@ -150,6 +162,11 @@
             font-size: 16px;
             cursor: pointer;
             border: none;
+
+            &:disabled{
+                background-color: #115a3180;
+                cursor: not-allowed;
+            }
         }
     }
 }

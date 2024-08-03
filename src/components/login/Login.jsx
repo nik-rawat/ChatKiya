@@ -22,7 +22,6 @@ const Login = () => {
             }) 
             console.log(avatar.file)
         }
-        
     }
 
     const handleLogin = async e => {
