@@ -11,7 +11,7 @@ import upload from "../../lib/upload"
 const Chat = () => {
   const [open, setOpen] = useState(false);
   const [chat, setChat] = useState();
-  const { chatId, user, isCurrentUserBlocked, isReceiverBocked } = useChatStore();
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } = useChatStore();
   const { currentUser } = useUserStore();
   const [text, setText] = useState("");
   const [img, setImg] = useState({
@@ -169,7 +169,8 @@ const Chat = () => {
 
       </div>
 
-      <div className="bottom">
+        { (!isCurrentUserBlocked && !isReceiverBlocked) &&
+          <div className="bottom">
         <div className="icons">
           <label htmlFor="file">
             <img src="/img.png" alt="" />
@@ -179,15 +180,16 @@ const Chat = () => {
           <img src="/mic.png" alt="" />
         </div>
 
-        <input type="text" placeholder={(isCurrentUserBlocked || isReceiverBocked) ? "You cannot send messages" :"Type here..."} value={text} onChange={e=> setText(e.target.value)} disabled= {isCurrentUserBlocked || isReceiverBocked}/>
+        <input type="text" placeholder="Type here..." value={text} onChange={e=> setText(e.target.value)} />
         <div className="emoji">
           <img src="./emoji.png" alt="" onClick={() => setOpen (prev => !prev)}/>
           <div className="picker">
           <EmojiPicker open={open} onEmojiClick={handleEmoji} />
           </div>
         </div>
-        <button className="sendButton" onClick={handleSend} disabled= {isCurrentUserBlocked || isReceiverBocked}>Send</button>
+        <button className="sendButton" onClick={handleSend}>Send</button>
       </div>
+      }
     </div>
   )
 }
